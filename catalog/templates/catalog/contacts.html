@@ -123,10 +123,11 @@
 					<p>While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.</p>
 				</div>
 				<div class="col-lg-4 mx-5">
-					<form class="card p-3">
+					<form class="card p-3" method="post">
+                        {%  csrf_token %}
 						<div class="col mb-3">
 							<label for="Name" class="form-label">Имя</label>
-							<input type="text" class="form-control" id="Name" placeholder="" value="" required="">
+							<input type="text" class="form-control" name="name" placeholder="" value="" required="">
 							<div class="invalid-feedback">
 								Введите имя.
 							  </div>
@@ -135,7 +136,7 @@
 						  <label for="email" class="form-label">Почта</label>
 						  <div class="input-group has-validation">
 							<span class="input-group-text bg-body-secondary">@</span>
-							<input type="text" class="form-control" id="email" placeholder="" required="">
+							<input type="email" class="form-control" name="email" placeholder="" required="">
 						  <div class="invalid-feedback">
 							  Введите почту.
 							</div>
@@ -143,7 +144,7 @@
 						</div>
 						<div class="col mb-3">
 							<label for="message" class="form-label">Сообщение</label>
-							<textarea class="form-control" placeholder="" id="floatingTextarea2Disabled" style="height: 70px"></textarea>
+							<textarea class="form-control" placeholder="" name="message" style="height: 70px"></textarea>
 							<div class="invalid-feedback">
 								Введите сообщение.
 							  </div>
