@@ -18,6 +18,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
+
 class Product(models.Model):
 
     name = models.CharField(max_length=250, verbose_name='Name')
@@ -34,3 +35,16 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=250, verbose_name='Contact name')
+    email = models.EmailField(max_length=250, verbose_name='Email')
+    message = models.TextField(**NULLABLE, verbose_name='Message')
+
+    def __str__(self):
+        return f'{self.name} ({self.email}): {self.message}'
+
+    class Meta:
+        verbose_name = 'Contact'
+        verbose_name_plural = 'Contacts'

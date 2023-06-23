@@ -6,8 +6,14 @@
 <div class="row g-5 justify-content-center mt-4">
 	<div class="col-lg-5 order-last mx-5">
 		<h3>Наши контакты</h3>
-		<p>Lorem ipsum dolor sit amet. consectetur adipiscina elit. sed do elusmod tempor incididunt ut labore et dolore maana aliqua. Ut enim ad minim veniam. auis nostrud exercitation ullamco laboris nisi ut allauio ex ea comodo conseguac. Dus aute trure dolor in reprenendent in voluotate velIt esse cillum dolore eu rugiat nulla pariatur. Excepteur sint occaecat
-			cupidatat non proident, sunt in culpa qui otticia deserunt mollit anim id est laborum.</p>
+		
+		<!-- Get contacts from database -->
+		<ul>
+			{% for i in contacts %}
+				<li>{{i}}</li>
+			{% endfor %}
+		</ul>	
+	
 		<p>While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.</p>
 	</div>
 	<div class="col-lg-4 mx-5">
