@@ -13,7 +13,15 @@ def index(request):
     else:
         for product in list_products:
             print(product)
-    return render(request, 'catalog/index.html')
+
+    # Get all products from catalog
+    products = Product.objects.all()
+
+    context = {
+        'object_list': products,
+    }
+
+    return render(request, 'catalog/index.html', context)
 
 def contacts(request):
     data = Contact.objects.all()
@@ -23,3 +31,4 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'{name} ({email}): {message}')
     return render(request, 'catalog/contacts.html',{"contacts": data})
+
