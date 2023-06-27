@@ -12,7 +12,7 @@ class Category(models.Model):
     # created_at = models.DateTimeField(**NULLABLE, verbose_name='Created At')
 
     def __str__(self):
-        return f'{self.name} ({self.description})'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'Category'

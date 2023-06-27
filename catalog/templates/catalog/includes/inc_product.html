@@ -1,14 +1,17 @@
-<div class="col-lg-auto mx-lg-5">
+<div class="col-lg-auto mx-lg-5" style="width: 20vw;">
     <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-            <h4 class="my-0 fw-normal"> Товар 1 </h4>
+            <h4 class="my-0 fw-normal"> {{ object.name }} </h4>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">$100</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included, 2 GB of storage,</li>
-                <li>Email support, Help center access</li>
-            </ul>
+            <h1 class="card-title pricing-card-title">$ {{ object.price }}</h1>
+            {#            <ul class="list-unstyled mt-3 mb-4">#}
+            {#                <li>10 users included, 2 GB of storage,</li>#}
+            {#                <li>Email support, Help center access</li>#}
+            {#            </ul>#}
+            <p class="card-text"> {{ object.category }}</p>
+            <p class="d-inline-block text-truncate text-wrap"
+                  style="max-height: 7ch; max-width: 25ch;"> {{ object.description }}</p>
             <button type="button" class="w-100 btn btn-lg btn-outline-primary">
                 Купить
             </button>
