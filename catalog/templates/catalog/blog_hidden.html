@@ -10,12 +10,12 @@
             <a class="btn btn-outline-primary"
                href="{% url 'catalog:blog_create' %}">Добавить блог</a>
             <a class="btn btn-outline-secondary"
-               href="{% url 'catalog:blog_hidden' %}">Скрытые блоги</a>
+               href="#">Скрытые блоги</a>
         </div>
     </div>
     <div class="row">
         {% for object in object_list %}
-            {% if object.is_published %}
+            {% if not object.is_published %}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <div class="card-header">

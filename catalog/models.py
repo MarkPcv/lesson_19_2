@@ -56,7 +56,7 @@ class Blog(models.Model):
     content = models.TextField(verbose_name='Content')
     preview = models.ImageField(upload_to='blog/',**NULLABLE, verbose_name='Preview')
     date_created = models.DateTimeField(verbose_name='Date Created')
-    type = models.CharField(max_length=150, **NULLABLE, verbose_name='Type')
+    is_published = models.BooleanField(default=True, verbose_name='published')
     views_count = models.IntegerField(default=0, verbose_name='views')
 
     def __str__(self):

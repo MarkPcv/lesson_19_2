@@ -47,7 +47,7 @@ def contacts(request):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ('title', 'content', 'date_created', 'preview')
+    fields = ('title', 'content', 'date_created', 'preview', 'is_published')
     success_url = reverse_lazy('catalog:blog_list')
 
     def form_valid(self, form):
@@ -61,7 +61,7 @@ class BlogCreateView(CreateView):
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ('title', 'content', 'date_created', 'preview')
+    fields = ('title', 'content', 'date_created', 'preview', 'is_published')
 
     def form_valid(self, form):
         if form.is_valid:
@@ -92,3 +92,10 @@ class BlogDetailView(DetailView):
 class BlogDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('catalog:blog_list')
+
+
+def hidden_blog(request):
+    context = {
+        'object_list': Blog.objects.all(),
+    }
+    return render(request, 'catalog/blog_hidden.html', context)
