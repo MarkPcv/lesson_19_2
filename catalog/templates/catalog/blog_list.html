@@ -29,8 +29,8 @@
                                    class="btn btn-sm btn-outline-secondary">View</a>
                                 <a href='{% url 'catalog:blog_edit' object.pk %}' type="button"
                                    class="btn btn-sm btn-outline-secondary">Edit</a>
-                                {#                            <a href='{% url 'materials:delete' object.pk %}' type="button"#}
-                                {#                               class="btn btn-sm btn-outline-danger">Delete</a>#}
+                                <a href='{% url 'catalog:blog_delete' object.pk %}' type="button"
+                                   class="btn btn-sm btn-outline-danger">Delete</a>
                             </div>
                         </div>
                     </div>
