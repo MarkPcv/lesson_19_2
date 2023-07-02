@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView, ListView
+from pytils.translit import slugify
 
-from catalog.models import Product, Contact
+from catalog.models import Product, Contact, Blog
 
 
 class IndexView(TemplateView):
@@ -41,4 +43,24 @@ def contacts(request):
         print(f'{name} ({email}): {message}')
     return render(request, 'catalog/contacts.html',{"contacts": data})
 
+
+class BlogCreateView(CreateView):
+    model = Blog
+    fields = ('title', 'content', 'date_created', 'preview')
+    success_url = reverse_lazy('catalog:blog_list')
+
+    def form_valid(self, form):
+        if form.is_valid:
+            new_mat = form.save()
+            new_mat.slug = slugify(new_mat.title)
+            new_mat.save()
+
+        return super().form_valid(form)
+
+class BlogListView(ListView):
+    model = Blog
+
+    # def query(self, *args, **kwargs):
+    #     queryset = super().get_queryset(*args, **kwargs)
+    #     return queryset
 

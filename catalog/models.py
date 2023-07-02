@@ -48,3 +48,20 @@ class Contact(models.Model):
     class Meta:
         verbose_name = 'Contact'
         verbose_name_plural = 'Contacts'
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=150, verbose_name='Title')
+    slug = models.CharField(max_length=150, verbose_name='slug', null=True, blank=True)
+    content = models.TextField(verbose_name='Content')
+    preview = models.ImageField(upload_to='blog/',**NULLABLE, verbose_name='Preview')
+    date_created = models.DateTimeField(verbose_name='Date Created')
+    type = models.CharField(max_length=150, **NULLABLE, verbose_name='Type')
+    views_count = models.IntegerField(default=0, verbose_name='views')
+
+    def __str__(self):
+        return f"{self.title} ({self.date_created.date()}): {self.content}"
+
+    class Meta:
+        verbose_name = 'Blog'
+        verbose_name_plural = 'Blogs'
