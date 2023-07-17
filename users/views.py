@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.forms import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
@@ -32,6 +33,40 @@ class RegisterView(CreateView):
             recipient_list=[self.object.email]
         )
         return super().form_valid(form)
+
+
+def reset(request):
+    found = False  # flag to check existing user
+    email = None
+    user_to_save = None
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        users = User.objects.all()
+        for user in users:
+            if email == user.email:
+                found = True
+                user_to_save = user
+                user
+        # Generate new password
+        if not found:
+            print('No email found')
+            render(request, 'users/reset.html')
+        else:
+            new_password = User.objects.make_random_password(length=12)
+            # new_password = '123admin123'
+            send_mail(
+                subject='Восстановление пароля',
+                message=(f'Пользователь - {email}\n'
+                         f'Ваш новый пароль: {new_password}'),
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email]
+            )
+            user_to_save.set_password(new_password)
+            user_to_save.save()
+            return redirect(reverse('users:login'))
+
+    return render(request, 'users/reset.html')
+
 
 
 

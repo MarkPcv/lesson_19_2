@@ -8,7 +8,9 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-success">Вход
+                        <a href="{% url 'users:reset' %}" class="link-dark">Восстановить пароль?</a>
+                        <br>
+                        <button type="submit" class="btn btn-outline-primary mt-3">Вход
                         </button>
                     </form>
                 </div>
