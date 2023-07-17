@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -28,6 +29,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Price')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created')
     date_modified = models.DateTimeField(**NULLABLE, verbose_name='Date Modified')
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Owner')
 
     def __str__(self):
         return f'{self.name} (Price: {self.price}): {self.description}'
