@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, CreateView, ListView, \
 from pytils.translit import slugify
 
 from catalog.forms import ProductForm
-from catalog.models import Product, Contact, Blog
+from catalog.models import Product, Contact, Blog, Version
 
 
 class IndexView(TemplateView):
@@ -14,6 +14,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['object_list'] = Product.objects.all()
+        context_data['version_list'] = Version.objects.all()
         return context_data
 
 # def index(request):
@@ -106,4 +107,6 @@ class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
+
+
 

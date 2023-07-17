@@ -74,7 +74,7 @@ class Version(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='Active')
 
     def __str__(self):
-        return f'{self.name} ({self.number}): {self.product}'
+        return f'Версия №{self.number}: {self.name}'
 
     class Meta:
         verbose_name = 'Version'
