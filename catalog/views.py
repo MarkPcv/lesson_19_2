@@ -1,11 +1,11 @@
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, formset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, CreateView, ListView, \
     DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, InlineVersionFormSet
 from catalog.models import Product, Contact, Blog, Version
 
 
@@ -119,8 +119,10 @@ class ProductUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        VersionFormSet = inlineformset_factory(Product, Version, form=VersionForm,
-                                              extra=1)
+        VersionFormSet = inlineformset_factory(Product, Version,
+                                                form=VersionForm,
+                                                formset=InlineVersionFormSet,
+                                                extra=1)
         if self.request.method == 'POST':
             formset = VersionFormSet(self.request.POST, instance=self.object)
         else:
@@ -138,3 +140,5 @@ class ProductUpdateView(UpdateView):
             formset.instance = self.object
             formset.save()
         return super().form_valid(form)
+
+

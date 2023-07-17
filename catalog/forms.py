@@ -7,6 +7,8 @@ class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
+            if field_name == 'is_active':
+                continue
             field.widget.attrs['class'] = 'form-control'
 
 
@@ -40,3 +42,22 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class InlineVersionFormSet(forms.BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+        # counter to store number of active versions
+        counter = 0
+        # loop to check the number of active versions
+        for form in self.forms:
+            # check if version is active
+            if form.cleaned_data.get('is_active'):
+                counter += 1
+            # raise error if more than one active version exist
+            if counter > 1:
+                print('Только одна активная версия продукта может быть. '
+                      'Выберите одну версию продукта.')
+                raise forms.ValidationError(
+                    'Только одна активная версия продукта может быть. '
+                    'Выберите одну версию продукта.')
