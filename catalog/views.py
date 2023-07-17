@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, CreateView, ListView, \
     DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
+from catalog.forms import ProductForm
 from catalog.models import Product, Contact, Blog
 
 
@@ -99,3 +100,10 @@ def hidden_blog(request):
         'object_list': Blog.objects.all(),
     }
     return render(request, 'catalog/blog_hidden.html', context)
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:index')
+

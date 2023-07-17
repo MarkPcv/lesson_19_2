@@ -7,6 +7,9 @@
         style="height: 15vh;">Главная</h1>
     <p class="text-center fs-5 text-secondary">Вы находитесь на сайте,
         предназначеном для продажи товаров.</p>
+    <div class="col-5 m-3">
+        <a href="{% url 'catalog:product_create' %}" class="btn btn-outline-primary"> Создать продукт </a>
+    </div>
     <div class="row row-cols-lg-3 my-5 text-center align-items-center justify-content-center">
 
         {% for object in object_list %}
