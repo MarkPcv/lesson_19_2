@@ -1,13 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.forms import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserRegisterFrom
+from users.forms import UserRegisterForm, UserForm
 from users.models import User
 
 
@@ -19,7 +18,7 @@ class LogoutView(BaseLogoutView):
 
 class RegisterView(CreateView):
     model = User
-    form_class = UserRegisterFrom
+    form_class = UserRegisterForm
     success_url = reverse_lazy('users:login')
     template_name = 'users/register.html'
 
@@ -33,6 +32,15 @@ class RegisterView(CreateView):
             recipient_list=[self.object.email]
         )
         return super().form_valid(form)
+
+
+class UserUpdateForm(UpdateView):
+    model = User
+    form_class = UserForm
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def reset(request):
