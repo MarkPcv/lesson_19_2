@@ -34,7 +34,7 @@ class RegisterView(CreateView):
         return super().form_valid(form)
 
 
-class UserUpdateForm(UpdateView):
+class UserUpdateView(UpdateView):
     model = User
     form_class = UserForm
     success_url = reverse_lazy('users:profile')
