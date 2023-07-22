@@ -150,3 +150,5 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
+class ProductDetailView(DetailView):
+    model = Product
