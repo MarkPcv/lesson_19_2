@@ -6,7 +6,8 @@ from django.views.generic import TemplateView, CreateView, ListView, \
 from pytils.translit import slugify
 
 from catalog.forms import ProductForm, VersionForm, InlineVersionFormSet
-from catalog.models import Product, Contact, Blog, Version
+from catalog.models import Product, Contact, Blog, Version, Category
+from catalog.services import get_categories_cache
 
 
 class IndexView(TemplateView):
@@ -152,3 +153,14 @@ class ProductUpdateView(UpdateView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['category_list'] = get_categories_cache()
+        return context_data
+
+

@@ -97,11 +97,12 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#speedometer2"/>
-                    </svg>
-                    Категории
+                <a href="{% url 'catalog:category_list' %}" {% block tab_cat %}
+                   class="nav-link text-white" {% endblock tab_cat %}>
+                <svg class="bi pe-none me-2" width="16" height="16">
+                    <use xlink:href="#speedometer2"/>
+                </svg>
+                Категории
                 </a>
             </li>
             <li>
@@ -143,14 +144,14 @@
                     <strong>Пользователь</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item"
-                               href="{% url 'users:profile' %}">Профиль</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="{% url 'users:logout' %}">Выход</a></li>
+                    <li><a class="dropdown-item"
+                           href="{% url 'users:profile' %}">Профиль</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item"
+                           href="{% url 'users:logout' %}">Выход</a></li>
                 </ul>
             </div>
         {% else %}
